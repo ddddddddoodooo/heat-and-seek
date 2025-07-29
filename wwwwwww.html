@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Heat and Seek</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: url('photos/https___unsplash_com_photos_orange-and-blue-color-illustration-p-NQlmGvFC8_utm_source=unsplash&utm_campaign=unsplash-ios&utm_medium=referral&utm_content=view-photo-on-unsplash%20(1).jpeg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 0.5rem 1rem;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .top-bar img {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.75rem;
+    }
+
+    .top-bar span {
+      font-size: 1rem;
+    }
+
+    nav, header, section, .card, footer {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.75);
+      color: white;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      font-family: 'Oswald', sans-serif;
+      z-index: 999;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffccbc;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      font-family: 'Oswald', sans-serif;
+      border-radius: 0 0 20px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    section {
+      background-color: rgba(255, 255, 255, 0.75);
+      margin: 2rem auto;
+      padding: 2rem;
+      max-width: 1100px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      color: #b71c1c;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      padding: 1.5rem;
+      border-left: 6px solid #b71c1c;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-family: 'Oswald', sans-serif;
+      color: #b71c1c;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #eee;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .profile-slider {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .profile-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .profile-card {
+      min-width: 200px;
+      flex: 0 0 auto;
+      background: rgba(255,255,255,0.85);
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .profile-card img {
+      width: 100%;
+      max-width: 150px;
+      border-radius: 50%;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-card h4 {
+      margin: 0.5rem 0 0.2rem;
+      font-family: 'Oswald', sans-serif;
+      color: #b71c1c;
+    }
+
+    .profile-card p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        margin-bottom: 1rem;
+        background-color: rgba(255,255,255,0.9);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 0.5rem;
+      }
+
+      td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid #ccc;
+      }
+
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #b71c1c;
+      }
+
+      td:last-child {
+        border-bottom: none;
+      }
+
+      nav a {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <span>St. Mary's Academy</span>
+  </div>
+
+
+
+  <nav>
+    <a href="#what">Home</a>
+    <a href="#causes">Causes & Effects</a>
+    <a href="#levels">Risk Levels</a>
+    <a href="#actions">Actions</a>
+    <a href="#Agencies">Agencies</a>
+    <a href="#evacuation-info">Evacuation Info</a>
+    <a href="#us">Our Team</a>
+  </nav>
+
+  <header id="what">
+    <h1>Heat & Seek Preparedness Guide</h1>
+    <p>Group 4 - The Heaters (Heat And Seek) from G10 - Our Lady Of The Light </p>
+  </header>
+
+  <section id="what">
+    <h2>HEAT INDEX</h2>
+    <p>Extreme heat or a high heat index refers to a period of excessively hot weather, often accompanied by high humidity, which makes it feel hotter than the actual air temperature. The heat index is a measure that combines air temperature to determine how hot it actually feels to the human body. <br>
+In Pasay City, located in Metro Manila, the heat index has become a serious concern, especially during the dry season (March to May). According to PAGASA (Philippine Atmospheric, Geophysical and Astronomical Services Administration), Pasay has experienced heat index levels exceeding 42°C, which falls under the "danger" category. At this level, heat cramps and heat exhaustion are likely, and heat stroke becomes possible with prolonged exposure or physical activity.
+<br>
+<br>
+In April and May 2024, PAGASA recorded heat indices in Pasay between 40°C and 46°C. These levels led to the suspension of afternoon classes, increased cases of heat-related illnesses, and higher electricity usage due to reliance on air conditioning and fans. Extreme heat is not just a discomfort, it poses serious health risks, especially to the elderly, children, outdoor workers, and people with chronic illnesses.</p>
+  </section>
+
+  <section id="causes">
+    <h2>Causes and Effects</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Causes</h3>
+        <p>The extreme humidity and the rise in temperature due to climate change are the main causes of the high heat index we see in the Philippines. The heat is trapped in cities because of urbanization, especially in cities with little to no green spaces and too many concrete surfaces. Deforestation can also be another cause as it weakens forests and other natural cooling systems in our surroundings. making people more exposed to intense heat. Furthermore Heat index is the temperature of the sun, causing it to affect our body temperature. Its humidity to our environment causes us numerous individuals to feel the air, which reasons why we are affected by this issue. Climate change is a big factor to the entire globe, and one of its effects are heat index. Due to the heat index, most individuals have been experiencing health problems. In our atmosphere, we mostly tend to problem heat index and it causes people’s health to be affected. </p>
+      </div>
+      <div class="card">
+        <h3>Effects</h3>
+        <p>Having a high heat index can give severe problems in health such as heat stroke. Specifically vulnerable groups like the elderly and children. Dizziness, nausea, and a fast heartbeat are some symptoms that people might experience due to this, it can worsen chronic illness like heart and lung conditions. Additionally here are more effects of the heat index, It includes high temperatures that impact air circulation and an individual's sense of their body temperature. One of the effects is dehydration, where it is one of the common impacts of heat index. The possible effects of heat index are fatigue, which may result in fainting and is also a result of dehydration. Heat cramps are included, whether it may be at the muscles or other parts. Again strokes in heat index, are a common yet unsafe situation during the time of the climate; it may affect one’s muscles, heart or brain if not treated immediately. Headaches may also occur due to the high heat of the climate. One may also develop sunburns due to the high temperature of the climate and surroundings. 
+ </p>
+      </div>
+    </div>
+    <section>
+      <p>For us people to be safe during the heat index, we may stay hydrated at all times. Individuals shall also wear light clothes for their body will be cool and relaxed. In case of emergencies in heat index, people can prepare canned goods and needs, especially sunscreen and hats to help and keep the skin safe. For evacuation centers, the recommended centers in Pasay are the Barangay Hall and the community centers</p>
+  </section>
+
+  <hr>
+
+  <section id="levels">
+    <h2>What happens when it gets too hot?</h2>
+    <p>If the heat index goes over 42°C, PAGASA issues a "danger" warning. Once it hits 52°C, it enters the "extreme danger" level, where heat stroke is likely—even with short exposure. During these times, the government may suspend classes, cancel outdoor work, or open cooling shelters and evacuation centers..</p>
+  
+
+    <h2>Heat Index Risk Levels</h2>
+    <ul>
+      <li><strong>Caution (27°C–32°C):</strong> Increased sweating, fatigue</li>
+      <li><strong>Extreme Caution (33°C–41°C):</strong> Possible cramps, exhaustion</li>
+      <li><strong>Danger (42°C–51°C):</strong> Heat stroke becomes likely</li>
+      <li><strong>Extreme Danger (52°C and up):</strong> Heat stroke highly likely</li>
+    </ul>
+    <hr>
+    <p> When danger levels are reached, agencies give public alerts and prepare evacuation centers. These centers usually have electric fans or air-conditioning, cold drinking water, first-aid kits, and trained health workers. Some LGUs use open gyms or barangay halls so more people can stay cool safely. For example, Iloilo City allocated PHP 43 million to build heat-safe evacuation centers in different barangays due to worsening summer heat
+      <br>
+      <br>
+
+<h2 id="Agencies">Agencies</h2>
+
+In the Philippines, the weather can get dangerously hot, especially during dry seasons or when climate events like El Nino happen. When both temperature and humidity are high, people don't just feel uncomfortable, it can actually be life threatening. The heat index is what tells us how hot it feels outside. For example, if it says 36°C on the weather app, it could actually feel like 45°C if the air is really humid. 
+<br>
+<br>
+
+When it's very humid, our sweat doesn't evaporate properly. And if we can't cool down, our body temperature rises. That's when people start to feel dizzy, tired, and sick. Some even faint or end up in the hospital. That's why evacuation centers are sometimes opened not just for floods or typhoons, but for heat too. These centers offer air-conditioned or ventilated spaces, drinking water, and medical help when needed. Government agencies rely on heat index data to make these decisions and keep people safe.
+</p>
+<hr>
+  
+  <div style="overflow-x:auto;id=agencies">
+    <table style="width:100%; border-collapse: collapse; background-color: rgba(255,255,255,0.8); border-radius: 12px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      <thead>
+        <tr style="background-color: #b71c1c; color: white;">
+          <th style="padding: 1rem; text-align: left;">Agency</th>
+          <th style="padding: 1rem; text-align: left;">Hotline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 1rem;">Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA)</td>
+          <td style="padding: 1rem;">(02) 8284-0800</td>
+        </tr>
+        <tr>
+          <td style="padding: 1rem;">Department of Health (DOH)</td>
+          <td style="padding: 1rem;">1555 or (02) 894-COVID [26843]</td>
+        </tr>
+        <tr>
+          <td style="padding: 1rem;">Climate Change Commission (CCC)</td>
+          <td style="padding: 1rem;">(02) 8254-7056</td>
+        </tr>
+        <tr>
+          <td style="padding: 1rem;">Department of Science and Technology (DOST)</td>
+          <td style="padding: 1rem;">(02) 8837-2071 to 82</td>
+        </tr>
+        <tr>
+          <td style="padding: 1rem;">Local Government Units / DRRM Offices</td>
+          <td style="padding: 1rem;">(02) 8831-5000 local 211</td>
+        </tr>
+        <tr>
+          <td style="padding: 1rem;">Department of Environment and Natural Resources (DENR)</td>
+          <td style="padding: 1rem;">(02) 8929-6626 / 8927-1517</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+  </section>
+
+  <section id="actions">
+     <h2>What are the things to do before, during and after the disaster strikes?</h2>
+    <br>
+    <br>
+    <div class="grid">
+      <div class="card">
+        <h3>before</h3>
+        <ul>
+          <li>- Remove excess and tight clothing for airflow
+</li>
+          <li>Stay hydrated and drink a lot of water regularly</li>
+          <li>avoid doing outdoor activities when it is peak heat hours (10 am up to 4 pm)
+</li>
+
+        </ul>
+  </div>
+      <div class="card">
+        <h3>During</h3>
+        <ul>
+          <li>Apply cold compress to wrists/neck</li>
+          <li>Move to cooler place</li>
+          <li>Use fans, cool sprays</li>
+          <li>Elevate legs if someone faints</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>After</h3>
+        <ul>
+          <li>Keep hydrated</li>
+          <li>Monitor symptoms</li>
+          <li>Seek medical help if needed</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+    <section id="evacuation-info">
+  <h2>Evacuation & Emergency Info</h2>
+
+  <div style="background-color: rgba(255,255,255,0.8); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    
+    <h3 style="margin-top: 1.5rem; color: #b71c1c;">Nearby Cooling Establishments</h3>
+    <table style="width:100%; border-collapse: collapse; background-color: rgba(255,255,255,0.9); margin-top: 0.5rem;">
+      <thead>
+        <tr style="background-color: #b71c1c; color: white;">
+          <th style="padding: 0.75rem; text-align: left;">Establishment</th>
+          <th style="padding: 0.75rem; text-align: left;">Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 0.75rem;">Jollibee</td>
+          <td style="padding: 0.75rem;">G/F Spring Cinema Bldg., Arnaiz Ave, Cor Burgos St, Pasay City</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.75rem;">Chowking</td>
+          <td style="padding: 0.75rem;">Spring Cinema Bldg, Burgos St, Libertad, Cor P. Burgos, Brgy. 60, Pasay</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.75rem;">Coffee Chapters</td>
+          <td style="padding: 0.75rem;">P. Burgos, Pasay City</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 1.5rem; color: #b71c1c;">Medical and Emergency Supplies</h3>
+    <ul>
+      <li><strong>Mercury Drug:</strong> G2X2+7CF, Antonio S. Arnaiz Ave, Pasay City</li>
+      <li><strong>Pasay General Hospital:</strong> Located directly in front of St. Mary’s Academy</li>
+    </ul>
+  </div>
+</section>
+<br>
+<center>
+    <h2>Heat index levels are increasing, and we must prepare proactively. Understanding risks, knowing where to go, and supporting cooling efforts are vital to keeping everyone safe. Let’s stay cool and stay informed!</h2>
+</center>
+<br>
+
+<section id="us">
+    <center><h2>Our Team !!!</h2></center>
+    <p style="text-align: center;">click the team profile to visit our Instagram page!</p>
+    <div class="profile-slider">
+      <div class="profile-card">
+        <img src="photos/515111675_1885468342025407_2969141892142735496_n.jpg" alt="Member 1">
+        <h2>Deon</h2>
+
+        
+      </div>
+      <div class="profile-card">
+        <img src="photos/515146648_1062245592194244_6410637973210080696_n.jpg" alt="Member 2">
+        <h2>Angela</h2>
+      
+      </div>
+      <div class="profile-card">
+        <img src="photos/514033157_2670022899859387_6585856695650600764_n.jpg" alt="jil">
+        <h2>Fyel</h2>
+        
+      </div>
+      <div class="profile-card">
+        <img src="photos/511164193_732806125822388_7684957167703689298_n.jpg" alt="gelalim">
+        <h2>Jillian</h2>
+        
+      </div>
+      <a href="https://www.instagram.com/heatandseek/" target="_blank" class="profile-card">
+        <img src="photos/513212394_1132773891946324_5298439303801796089_n.jpg" alt="group ig">
+        <h2>@heatandseek</h2>
+      </a>
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2025 Heat & Seek</p>
+  </footer>
+
+</body>
+</html>
